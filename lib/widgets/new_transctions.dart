@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class NewTrasnctions extends StatelessWidget {
+class NewTrasnctions extends StatefulWidget {
   final Function addTx;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
 
   NewTrasnctions(this.addTx);
+
+  @override
+  _NewTrasnctionsState createState() => _NewTrasnctionsState();
+}
+
+class _NewTrasnctionsState extends State<NewTrasnctions> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -15,7 +22,10 @@ class NewTrasnctions extends StatelessWidget {
       return;
     }
 
-    addTx(enteredTitle, enteredAmount);
+    widget.addTx(enteredTitle, enteredAmount);
+
+    Navigator.of(context)
+        .pop(); //This will close the modal after adding a new data.
   }
 
   @override
